@@ -37,7 +37,7 @@ router.get('/road', async function(req, res) {
                 city: req.query.city,
                 town: req.query.town,
                 name: req.query.name,
-                speedLimit: speedLimit
+                speed: speedLimit
             }
         });
     } else {
@@ -50,7 +50,7 @@ router.get('/road', async function(req, res) {
                 city: req.query.city,
                 town: req.query.town,
                 name: req.query.name,
-                speedLimit: speedLimit
+                speed: speedLimit
             }
         });
     }

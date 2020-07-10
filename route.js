@@ -4,10 +4,12 @@ var express = require('express');
 var router = express.Router();
 
 const roadSpeedLimit = require('./methods/roadSpeedLimit');
-
+var moment = require('moment-timezone');
 
 
 router.get('/road', async function(req, res) {
+    console.log(moment().tz("Asia/Taipei").toString());
+
     // let conditions = {
     //     name: '環漢路二段',
     //     city: '新北市',
@@ -24,7 +26,6 @@ router.get('/road', async function(req, res) {
             req.query.city,
             req.query.town
         );
-
     }
 
     if (speedLimit === null) {
@@ -44,7 +45,7 @@ router.get('/road', async function(req, res) {
         res.send({
             status: {
                 type: 'ok',
-                message: '無資料'
+                message: ''
             },
             data: {
                 city: req.query.city,

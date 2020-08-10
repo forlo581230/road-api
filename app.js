@@ -2,6 +2,7 @@ var debug = require('debug')('road:route');
 var express = require('express');
 var app = express();
 var router = require('./route');
+var route_post = require('./route_post');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -10,7 +11,7 @@ var cors = require('cors');
 
 // app.use(logger('dev'));
 // app.set('view engine', 'ejs');
-app.use(bodyParser.json({ "limit": "1000kb" }));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const corsOptions = {
     origin: [
@@ -27,7 +28,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use(function(req, res, next) {
+app.use('/get', function(req, res, next) {
     if (req.query.key === "123") {
         debug("verification");
         next();
@@ -36,7 +37,18 @@ app.use(function(req, res, next) {
     }
 });
 
-app.use(router);
+app.use('/post', function(req, res, next) {
+    if (req.body.key === "123") {
+        debug("verification");
+        next();
+    } else {
+        res.send("err");
+    }
+});
+
+app.use('/get', router);
+app.use('/post', route_post);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

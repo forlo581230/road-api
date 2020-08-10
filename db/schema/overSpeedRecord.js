@@ -18,6 +18,8 @@ var schema = new Schema({
     lng: Number,
     driver: String,
     memberCode: String
+}, {
+    versionKey: false
 });
 
 // Create a model.

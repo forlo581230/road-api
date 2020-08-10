@@ -75,22 +75,60 @@ exports.test = (app) => {
     // 
     // 新北市土城區中央路四段349巷2號
 
-    describe('GET', function() {
+    describe('GET road', function() {
         for (let i = 0; i < queryList.length; i++) {
-            it(`respond 200 if /road query${i} successfully`, function(done) {
+            it(`respond 200 if /road get ${JSON.stringify(queryList[i].q)} successfully`, function(done) {
                 request(app)
-                    .get('/road')
+                    .get('/get/road')
                     .query(Object.assign({ key: '123' }, queryList[i].q))
                     .expect(200)
                     .end(function(err, res) {
                         if (err) return done(err);
                         assert.equal(res.body.status.type, 'ok');
-                        assert.equal(res.body.data.speedLimit, queryList[i].ans.speedLimit);
+                        assert.equal(res.body.data.speed, queryList[i].ans.speedLimit);
                         assert(res.body.data.constructor, Object);
                         done();
                     })
             });
         }
+
+    });
+
+    describe('POST insertRoad', function() {
+        it(`respond 200 if /insertRoad post successfully`, function(done) {
+            request(app)
+                .post('/post/insertRoad')
+                // .set('Content-Type', 'application/json')
+                .send({
+                    key: '123',
+                    list: [{
+                        name: '忠義路一段618號',
+                        city: '桃園市',
+                        town: '龜山區',
+                        nameType: null,
+                        speedLimit: 60,
+                        lat: 25.015873000000003,
+                        lng: 121.3480415
+                    }, {
+                        name: '忠義路一段618號',
+                        city: '桃園市',
+                        town: '龜山區',
+                        nameType: null,
+                        speedLimit: 60,
+                        lat: 25.015873000000003,
+                        lng: 121.3480415
+                    }]
+                })
+                .expect(200)
+                .end(function(err, res) {
+                    if (err) return done(err);
+                    console.log(res.body);
+                    // assert(res.body.constructor, Number);
+                    assert.equal(res.body.num, 2);
+                    done();
+                })
+        });
+
 
     });
 }

@@ -5,10 +5,11 @@ var router = express.Router();
 
 const roadSpeedLimit = require('./methods/roadSpeedLimit');
 var moment = require('moment-timezone');
+const RecordDB = require('./db/RecordDB');
 
 
 router.get('/road', async function(req, res) {
-    console.log(moment().tz("Asia/Taipei").toString());
+    // console.log(moment().tz("Asia/Taipei").toString());
 
     // let conditions = {
     //     name: '環漢路二段',
@@ -57,6 +58,5 @@ router.get('/road', async function(req, res) {
     }
 
 });
-
 
 module.exports = router;

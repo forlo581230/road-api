@@ -8,6 +8,7 @@ connectionString.Record = `mongodb://${IP}:27017/Record`;
 connectionString.mongoOptions = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useCreateIndex: true,
     poolSize: 500,
     socketTimeoutMS: 600000,
     connectTimeoutMS: 30000,

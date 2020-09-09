@@ -22,6 +22,8 @@ var schema = new Schema({
     versionKey: false
 });
 
+schema.index({ city: 1, town: 1, name: 1 });
+
 // Create a model.
 var OverSpeedRecord = mongoose.model('OverSpeedRecord', schema);
 

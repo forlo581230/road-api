@@ -41,9 +41,9 @@ function getSpeedLimit(
 
             //搜尋條件設定
             let conditions = {
-                name: newName,
                 city: city,
                 town: town,
+                name: newName
             };
 
             let proj = {
